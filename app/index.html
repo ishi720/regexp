@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="簡単に正規表現のテストが出来ます。">
+    <meta name="keywords" content="正規表現,シミュレーター,チェッカー">
+
+    <link rel="shortcut icon" type="image/x-icon" href="./img/favicon.ico">
+
+    <title>正規表現シミュレーター</title>
+
+    <!-- angular -->
+    <script src="node_modules/angular/angular.min.js"></script>
+    <script src="node_modules/angular-sanitize/angular-sanitize.min.js"></script>
+
+    <!-- jquery -->
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+
+    <!-- materialize css -->
+	<link rel="stylesheet" href="node_modules/materialize-css/dist/css/materialize.min.css">
+	<script src="node_modules/materialize-css/dist/js/materialize.min.js"></script>
+
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+
+    <!-- common -->
+    <script src="js/common.min.js"></script>
+    <link rel="stylesheet" href="css/common.min.css">
+</head>
+
+<body ng-controller="myController">
+
+    <!-- header -->
+    <nav>
+        <div class="nav-wrapper header">
+            <div class="site_title">正規表現シミュレーター</div>
+        </div>
+    </nav>
+
+    <div class="main">
+        <!-- 文章入力 -->
+     	<div class="row">
+    		<div class="input-field col s12 sentence">
+    			<label>文章入力</label>
+    			<textarea class="materialize-textarea" type="text" ng-model="sentence"></textarea>
+    		</div>
+    	</div>
+
+        <div class="row">
+            <div class="col s6">
+                <!-- 正規表現入力 -->
+        		<div class="input-field col s12">
+        			<input type="text" ng-model="regexp_text" spellcheck="false">
+        			<label>正規表現入力</label>
+        		</div>
+                <!-- フラグ設定 -->
+                <div class="switch col s12">
+                    <div class="col s12">
+                        <label>
+                            <input type="checkbox" ng-model="regexpflg_g" value="g"> 
+                            <span class="lever"></span>
+                            グローバルなマッチ ( g )
+                        </label>
+                    </div>
+                    <div class="col s12">
+                        <label>
+                            <input type="checkbox" ng-model="regexpflg_i" value="i"> 
+                            <span class="lever"></span>
+                            大文字・小文字の無視 ( i )
+                        </label>
+                    </div>
+                    <div class="col s12">
+                        <label>
+                            <input type="checkbox" ng-model="regexpflg_m" value="m"> 
+                            <span class="lever"></span>
+                            複数行に渡るマッチ ( m )
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col s6" style="box-shadow: 1px 1px 1px 1px rgba(128, 128, 128, 0.8);border-radius: 1px;">
+                <div class="col s12">
+                    <!-- 出力結果 -->
+                    <ul class="tabs">
+                        <!-- タブ -->
+                        <li class="tab col s6">
+                            <a href="#test1" class="active">view</a>
+                        </li>
+                        <li class="tab col s6">
+                            <a href="#test2">javascript</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- マッチ結果 -->
+                <div id="test1" class="col s12">
+                    <p>
+                        マッチ結果（マッチした文字が<span class="matched">赤く</span>なります）
+
+
+                        <span ng-bind="matche_count" class="badge"></span>
+                    </p>
+                    <div style="font-size:0.8em;color:red;" ng-bind="message"></div>
+
+                    <div class="result_box">
+                        <p ng-bind-html="view"></p>
+                    </div>
+                </div>
+
+
+                <!-- javascript コード -->
+                <div id="test2" class="col s12">
+                    <p>javascriptのコードです。コピペで正しく動作します。</p>
+                    <pre class="code" ng-bind="match_method"></pre>
+                    
+                    <p>結果配列</p>
+                    <div ng-bind-html="result"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

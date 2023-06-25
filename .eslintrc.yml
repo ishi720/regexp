@@ -1,0 +1,31 @@
+rules:
+  no-undef: #未定義のものを探す
+    - warn
+  indent: #インデントの指定
+    - error
+    - 4
+    - SwitchCase: 1 #SwitchCaseの特殊対応
+  quotes: #クォーテーションの指定
+    - error
+    - single
+  semi: #セミコロンの指定
+    - error
+    - always
+  no-console: #consoleの指定
+    - error
+    - allow: # warn()やerror()は、チェックしない
+      - warn
+      - error
+  comma-style: #カンマの指定
+    - error
+    - last #最後にカンマをつける
+
+# 参考: https://eslint.org/docs/user-guide/configuring#specifying-environments
+env:
+  browser: true
+  jquery: true
+  amd: true
+  es6: true
+
+extends:
+  - eslint:recommended #ESlintオススメの設定

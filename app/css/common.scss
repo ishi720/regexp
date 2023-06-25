@@ -1,0 +1,65 @@
+@charset 'UTF-8';
+
+// $theme_color: rgb(random(150), random(150), random(150));
+$theme_color: #26a69a;
+body {
+    background-color: #fcfcfc;
+}
+.header {
+    background-color: $theme_color;
+}
+.site_title {
+    font-size: 1.8em;
+    padding: 0 10px;
+}
+.main {
+    padding: 10px;
+}
+.sentence textarea {
+    max-height: 100px;
+}
+.switch div {
+    margin: 10px;
+}
+blockquote {
+    border-left-color: $theme_color;
+}
+.matched {
+    color: #333;
+    background-color: darksalmon;
+    font-weight: bold;
+    margin: 0 3px;
+    padding: 0 2px;
+}
+span.badge {
+    background-color: crimson;
+    color: #fff;
+}
+.result_box {
+    min-height: 120px;
+    padding: 5px;
+}
+.result_box p {
+    margin: 0;
+    word-break: break-all;
+}
+.code {
+    background-color: rgba(0, 0, 0, .8);
+    color: #fff;
+    border-radius: 2px;
+    padding: 10px;
+    font-family: sans-serif;
+}
+.tabs a {
+    text-transform: none;
+    background-color: whitesmoke !important;
+    color: gray !important;
+    &.active {
+        color: $theme_color !important;
+        background-color: #fff !important;
+        font-weight: bold;
+    }
+}
+.indicator {
+    background-color: $theme_color !important;
+}

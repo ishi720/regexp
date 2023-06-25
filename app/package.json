@@ -1,0 +1,13 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "main": "index.html",
+  "license": "MIT",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "5.x.x",
+    "angular": "1.x.x",
+    "angular-sanitize": "1.x.x",
+    "jquery": "3.x.x",
+    "materialize-css": "1.x.x"
+  }
+}

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 744.09448819 1052.3622047"
+   id="svg2"
+   version="1.1"
+   inkscape:version="1.0.2-2 (e86c870879, 2021-01-15)"
+   sodipodi:docname="regexp.svg">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.061871843"
+     inkscape:cx="-1185.1787"
+     inkscape:cy="3019.2144"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:snap-text-baseline="false"
+     inkscape:window-width="979"
+     inkscape:window-height="979"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:document-rotation="0" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="レイヤー 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#26a69a;fill-opacity:1"
+       id="rect4147"
+       width="1055.2285"
+       height="581.29755"
+       x="-107.0336"
+       y="193.69106"
+       inkscape:export-xdpi="82.986763"
+       inkscape:export-ydpi="82.986763" />
+    <g
+       id="g4242"
+       transform="matrix(2.2507189,0,0,2.2507189,1560.466,367.50776)"
+       inkscape:export-xdpi="82.986763"
+       inkscape:export-ydpi="82.986763">
+      <rect
+         y="5.082725"
+         x="-619.89581"
+         height="59.598999"
+         width="59.598999"
+         id="rect4225"
+         style="fill:#ff5555;fill-opacity:1" />
+      <flowRoot
+         transform="matrix(1.4168897,0,0,1.4168897,275.14009,25.05532)"
+         style="font-style:normal;font-weight:normal;line-height:0.01%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="flowRoot4149"
+         xml:space="preserve"><flowRegion
+           id="flowRegion4151"><rect
+             y="-21.92351"
+             x="-630"
+             height="228.57143"
+             width="370"
+             id="rect4153" /></flowRegion><flowPara
+           style="font-size:40px;line-height:1.25;fill:#ffffff"
+           id="flowPara4159">正規表現</flowPara></flowRoot>
+      <rect
+         y="70.955681"
+         x="-573.11359"
+         height="27.779194"
+         width="27.779194"
+         id="rect4225-8"
+         style="fill:#ff5555;fill-opacity:1" />
+      <flowRoot
+         style="font-style:normal;font-weight:normal;line-height:0.01%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="flowRoot4149-5"
+         xml:space="preserve"
+         transform="matrix(0.64743484,0,0,0.64743484,-164.79138,80.6281)"><flowRegion
+           id="flowRegion4151-8"><rect
+             y="-21.92351"
+             x="-630"
+             height="228.57143"
+             width="370"
+             id="rect4153-6" /></flowRegion><flowPara
+           style="font-size:40px;line-height:1.25;fill:#ffffff"
+           id="flowPara4157-6">シミュレーター</flowPara><flowPara
+           style="font-size:40px;line-height:1.25;fill:#ffffff"
+           id="flowPara4159-9"> </flowPara></flowRoot>
+    </g>
+    <g
+       id="g4263"
+       transform="matrix(2.2507189,0,0,2.2507189,1745.5972,403.70958)"
+       inkscape:export-xdpi="82.986763"
+       inkscape:export-ydpi="82.986763">
+      <rect
+         ry="2.1117239"
+         y="123.43503"
+         x="-542.69391"
+         height="21.718277"
+         width="67.427696"
+         id="rect4261"
+         style="fill:#4d4d4d;fill-opacity:1" />
+      <flowRoot
+         transform="matrix(0.46922118,0,0,0.46922118,-234.74794,137.96159)"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Meiryo;-inkscape-font-specification:'Meiryo, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="flowRoot4149-4"
+         xml:space="preserve"><flowRegion
+           id="flowRegion4151-2"><rect
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:23.37295532px;line-height:125%;font-family:Meiryo;-inkscape-font-specification:'Meiryo, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff"
+             y="-21.92351"
+             x="-630"
+             height="228.57143"
+             width="370"
+             id="rect4153-1" /></flowRegion><flowPara
+           id="flowPara4221"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:23.373px;line-height:125%;font-family:Meiryo;-inkscape-font-specification:'Meiryo, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff">/^.+?/g</flowPara></flowRoot>
+    </g>
+  </g>
+</svg>
