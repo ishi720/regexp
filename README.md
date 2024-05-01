@@ -14,5 +14,5 @@ cd ./app/
 yarn install
 
 gulp sass
-gulp js-minify
+gulp jsminify
 ```

@@ -9,11 +9,9 @@
   "author": "ishi720",
   "license": "MIT",
   "dependencies": {
-    "browser-sync": "2.x.x",
-    "gulp": "4.x.x",
+    "browser-sync": "3.x.x",
+    "gulp": "5.x.x",
     "gulp-clean-css": "4.x.x",
-    "gulp-eslint": "6.x.x",
-    "gulp-package-version-format": "1.x.x",
     "gulp-plumber": "1.x.x",
     "gulp-rename": "2.x.x",
     "gulp-sass": "5.x.x",
