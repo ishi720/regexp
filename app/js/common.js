@@ -88,11 +88,11 @@ app.controller('myController', ['$scope', function ($scope, $sce) {
                 var match_count = matchCount(sentence,regexp_text,regExp_flags);
                 scope.match_count = match_count;
                 // view表示
-                scope.view = line_breaks_conversion(val,'<br>');
+                scope.view = lineBreaksConversion(val,'<br>');
                 scope.message = '';
                 // 配列表示
-                scope.result = array_table(match_arr);
-            } else if ( brackets_count(regexp_text) > 0){
+                scope.result = arrayTable(match_arr);
+            } else if ( bracketsCount(regexp_text) > 0){
                 // 括弧があるとき
 
                 var regExp_flags_w = regExp_flags + 'g';
@@ -136,17 +136,17 @@ app.controller('myController', ['$scope', function ($scope, $sce) {
                 var match_count = match_arr.length;
                 scope.match_count = match_count;
                 // view表示
-                scope.view = line_breaks_conversion(val,'<br>');
+                scope.view = lineBreaksConversion(val,'<br>');
                 scope.message = '※配列の0番目のみ表示しています';
                 // 配列表示
-                scope.result = array_table(match_arr);
+                scope.result = arrayTable(match_arr);
 
             } else {
 
-                if( brackets_count(regexp_text) > 0 ) {
+                if( bracketsCount(regexp_text) > 0 ) {
                     var pattern = regexp_text;
                 } else {
-                    var pattern = '(' + brackets_escape(regexp_text) + ')';
+                    var pattern = '(' + bracketsEscape(regexp_text) + ')';
                 }
 
                 var regExp = new RegExp( pattern, regExp_flags ) ;
@@ -157,7 +157,7 @@ app.controller('myController', ['$scope', function ($scope, $sce) {
                 var radStr1 = rndStr();
                 var radStr2 = rndStr();
 
-                if( brackets_count(regexp_text) > 0 ){
+                if( bracketsCount(regexp_text) > 0 ){
 
                     var split_array = [];
                     split_array = regexp_text.split(/\(.*?\)/);
@@ -176,22 +176,22 @@ app.controller('myController', ['$scope', function ($scope, $sce) {
                 var match_count = matchCount(sentence,regexp_text,regExp_flags);
                 scope.match_count = match_count;
                 // view表示
-                scope.view = line_breaks_conversion(val,'<br>');
+                scope.view = lineBreaksConversion(val,'<br>');
                 scope.message = '';
                 // 配列表示
-                scope.result = array_table(match_arr);
+                scope.result = arrayTable(match_arr);
             }
 
         } else {
             var val = escapeHtml(sentence);
             scope.match_count = 0;
-            scope.view = line_breaks_conversion(val,'<br>');
+            scope.view = lineBreaksConversion(val,'<br>');
         }
     });
 }]);
 
 //括弧をエスケープする
-function brackets_escape(str) {
+function bracketsEscape(str) {
     if (!str) {
         return str;
     }
@@ -201,14 +201,13 @@ function brackets_escape(str) {
 }
 
 //括弧のペアをカウント
-function brackets_count(str){
-
+function bracketsCount(str){
     return str.split(/\(.*?\)/).length - 1;
 }
 
 
 //改行コードを<br>に変換する
-function line_breaks_conversion(str,break_str) {
+function lineBreaksConversion(str,break_str) {
     if (!str) {
         return str;
     }
@@ -265,7 +264,7 @@ function matchMethodGenerate(str,regexp_text,regExp_flags){
     if (!regexp_text) {
         regexp_text = '';
     }
-    var code = 'var str = "'+ line_breaks_conversion(str,'\\n') + '";\n';
+    var code = 'var str = "'+ lineBreaksConversion(str,'\\n') + '";\n';
     code += 'var regExp = new RegExp("'+ regexp_text + '"';
     if( regExp_flags ){
         code += ', "'+ regExp_flags + '"';
@@ -279,7 +278,7 @@ function matchMethodGenerate(str,regexp_text,regExp_flags){
 
 
 // matchを配列にする
-function array_table(arr) {
+function arrayTable(arr) {
 
     var code = '';
     code += '<table class="centered highlight striped">\n';
