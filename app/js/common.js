@@ -12,7 +12,13 @@ app.controller('myController', ['$scope', function ($scope, $sce) {
     var encodeURL = encodeURIComponent(url);
     $scope.encodeURL = encodeURL;
 
-    $scope.$watchGroup(['sentence','regexp_text','regexpflg_g','regexpflg_i','regexpflg_m'], function (newVals, oldVals, scope) {
+    $scope.$watchGroup([
+        'sentence',
+        'regexp_text',
+        'regexpflg_g',
+        'regexpflg_i',
+        'regexpflg_m'
+    ], function (newVals, oldVals, scope) {
 
         var sentence = newVals[0];
         var regexp_text = newVals[1];
@@ -34,7 +40,7 @@ app.controller('myController', ['$scope', function ($scope, $sce) {
         }
 
         // javascriptを生成する
-        scope.match_method = matchMethodGenerate(sentence,regexp_text,regExp_flags);
+        scope.match_method = matchMethodGenerate(sentence, regexp_text, regExp_flags);
 
         if ( sentence && regexp_text ) {
 
@@ -45,8 +51,7 @@ app.controller('myController', ['$scope', function ($scope, $sce) {
             if( regExp_flags.match(/g/) && exec_check ){
 
                 // フラグにgがついているとき
-
-                var regExp = new RegExp( regexp_text , regExp_flags);
+                var regExp = new RegExp( regexp_text, regExp_flags);
 
                 // 正規表現にマッチした先頭文字の位置を取得する
                 var result;
@@ -63,9 +68,7 @@ app.controller('myController', ['$scope', function ($scope, $sce) {
                 // マッチ結果作成
                 var val = '';
                 var end_point = 0;
-                $.each(exec_arr,function(key){
-
-
+                $.each(exec_arr, function(key){
                     // 先頭文字を見つける
                     if( exec_arr[key] == end_point ){
                         val += '<span class="matched">';
@@ -85,10 +88,10 @@ app.controller('myController', ['$scope', function ($scope, $sce) {
                 //終了したとき
                 val += escapeHtml( sentence.slice(end_point) );
                 // カウント表示
-                var match_count = matchCount(sentence,regexp_text,regExp_flags);
+                var match_count = matchCount(sentence, regexp_text, regExp_flags);
                 scope.match_count = match_count;
                 // view表示
-                scope.view = lineBreaksConversion(val,'<br>');
+                scope.view = lineBreaksConversion(val, '<br>');
                 scope.message = '';
                 // 配列表示
                 scope.result = arrayTable(match_arr);
@@ -97,8 +100,8 @@ app.controller('myController', ['$scope', function ($scope, $sce) {
 
                 var regExp_flags_w = regExp_flags + 'g';
 
-                var regExp = new RegExp( regexp_text , regExp_flags);
-                var regExp_w = new RegExp( regexp_text , regExp_flags_w);
+                var regExp = new RegExp( regexp_text, regExp_flags);
+                var regExp_w = new RegExp( regexp_text, regExp_flags_w);
 
                 // 正規表現にマッチした先頭文字の位置を取得する
                 var result;
@@ -120,12 +123,12 @@ app.controller('myController', ['$scope', function ($scope, $sce) {
                 if( exec_arr[0] == end_point ){
                     val += '<span class="matched">';
                 } else {
-                    val += escapeHtml( sentence.substring(end_point,exec_arr[0]) );
+                    val += escapeHtml( sentence.substring(end_point, exec_arr[0]) );
                     end_point = exec_arr[0];
                     val += '<span class="matched">';
                 }
                 // マッチした箇所を閉じる
-                val += escapeHtml(  sentence.substr(end_point,match_arr[0].length) );
+                val += escapeHtml(  sentence.substr(end_point, match_arr[0].length) );
                 end_point = end_point + match_arr[0].length;
                 val += '</span>';
 
@@ -136,7 +139,7 @@ app.controller('myController', ['$scope', function ($scope, $sce) {
                 var match_count = match_arr.length;
                 scope.match_count = match_count;
                 // view表示
-                scope.view = lineBreaksConversion(val,'<br>');
+                scope.view = lineBreaksConversion(val, '<br>');
                 scope.message = '※配列の0番目のみ表示しています';
                 // 配列表示
                 scope.result = arrayTable(match_arr);
@@ -152,7 +155,7 @@ app.controller('myController', ['$scope', function ($scope, $sce) {
                 var regExp = new RegExp( pattern, regExp_flags ) ;
 
                 // 先頭からマッチした文字列の数を取得する
-                var match_arr = sentence.match(regexp_text,regExp_flags);
+                var match_arr = sentence.match(regexp_text, regExp_flags);
 
                 var radStr1 = rndStr();
                 var radStr2 = rndStr();
@@ -162,10 +165,10 @@ app.controller('myController', ['$scope', function ($scope, $sce) {
                     var split_array = [];
                     split_array = regexp_text.split(/\(.*?\)/);
 
-                    var val = sentence.replace( regExp , split_array[0] + radStr1 + '$1' + radStr2 + split_array[1]);
+                    var val = sentence.replace( regExp, split_array[0] + radStr1 + '$1' + radStr2 + split_array[1]);
 
                 } else {
-                    var val = sentence.replace( regExp , radStr1 + '$1' + radStr2) ;
+                    var val = sentence.replace( regExp, radStr1 + '$1' + radStr2) ;
                 }
                 val = escapeHtml(val);
                 var regExp_rnd1 = new RegExp( radStr1, 'g' ) ;
@@ -173,10 +176,10 @@ app.controller('myController', ['$scope', function ($scope, $sce) {
                 val = val.replace(regExp_rnd1,'<span class="matched">');
                 val = val.replace(regExp_rnd2,'</span>');
                 // カウント表示
-                var match_count = matchCount(sentence,regexp_text,regExp_flags);
+                var match_count = matchCount(sentence, regexp_text, regExp_flags);
                 scope.match_count = match_count;
                 // view表示
-                scope.view = lineBreaksConversion(val,'<br>');
+                scope.view = lineBreaksConversion(val, '<br>');
                 scope.message = '';
                 // 配列表示
                 scope.result = arrayTable(match_arr);
@@ -185,7 +188,7 @@ app.controller('myController', ['$scope', function ($scope, $sce) {
         } else {
             var val = escapeHtml(sentence);
             scope.match_count = 0;
-            scope.view = lineBreaksConversion(val,'<br>');
+            scope.view = lineBreaksConversion(val, '<br>');
         }
     });
 }]);
@@ -195,8 +198,8 @@ function bracketsEscape(str) {
     if (!str) {
         return str;
     }
-    str = str.replace( /\(/ , '\\(');
-    str = str.replace( /\)/ , '\\)');
+    str = str.replace( /\(/, '\\(');
+    str = str.replace( /\)/, '\\)');
     return str;
 }
 
@@ -207,11 +210,11 @@ function bracketsCount(str){
 
 
 //改行コードを<br>に変換する
-function lineBreaksConversion(str,break_str) {
+function lineBreaksConversion(str, break_str) {
     if (!str) {
         return str;
     }
-    str = str.replace( /[\r\n|\n|\r]/g , break_str);
+    str = str.replace( /[\r\n|\n|\r]/g, break_str);
     return str;
 }
 
@@ -245,7 +248,7 @@ function rndStr(){
 
 
 //マッチした文字をカウント
-function matchCount(str,pattern,regExp_flags) {
+function matchCount(str, pattern,regExp_flags) {
     if ( regExp_flags.match(/g/) ) {
         return (str.match(new RegExp(pattern, regExp_flags))||[]).length;
     } else if ( str.match(pattern) ) {
@@ -257,7 +260,7 @@ function matchCount(str,pattern,regExp_flags) {
 
 
 // matchメソッドを生成する
-function matchMethodGenerate(str,regexp_text,regExp_flags){
+function matchMethodGenerate(str, regexp_text,regExp_flags){
     if (!str) {
         str = '';
     }
