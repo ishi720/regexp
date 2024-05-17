@@ -6,7 +6,7 @@ $(document).ready(function(){
 var app = angular.module('myApp', ['ngSanitize']);
 
 app.controller('myController', ['$scope', function ($scope, $sce) {
-    
+
     //snsリンクにURLをセットする
     var url = location.href;
     var encodeURL = encodeURIComponent(url);
@@ -42,7 +42,7 @@ app.controller('myController', ['$scope', function ($scope, $sce) {
             if ( regexp_text == '^' || regexp_text == '$' ) {
                 exec_check = false;
             }
-            if( regExp_flags.match(/g/) && exec_check ){ 
+            if( regExp_flags.match(/g/) && exec_check ){
 
                 // フラグにgがついているとき
 
@@ -85,8 +85,8 @@ app.controller('myController', ['$scope', function ($scope, $sce) {
                 //終了したとき
                 val += escapeHtml( sentence.slice(end_point) );
                 // カウント表示
-                var matche_count = matchCount(sentence,regexp_text,regExp_flags);
-                scope.matche_count = matche_count;
+                var match_count = matchCount(sentence,regexp_text,regExp_flags);
+                scope.match_count = match_count;
                 // view表示
                 scope.view = line_breaks_conversion(val,'<br>');
                 scope.message = '';
@@ -133,8 +133,8 @@ app.controller('myController', ['$scope', function ($scope, $sce) {
                 val += escapeHtml(  sentence.slice(end_point) );
 
                 // カウント表示
-                var matche_count = match_arr.length;
-                scope.matche_count = matche_count;
+                var match_count = match_arr.length;
+                scope.match_count = match_count;
                 // view表示
                 scope.view = line_breaks_conversion(val,'<br>');
                 scope.message = '※配列の0番目のみ表示しています';
@@ -173,8 +173,8 @@ app.controller('myController', ['$scope', function ($scope, $sce) {
                 val = val.replace(regExp_rnd1,'<span class="matched">');
                 val = val.replace(regExp_rnd2,'</span>');
                 // カウント表示
-                var matche_count = matchCount(sentence,regexp_text,regExp_flags);
-                scope.matche_count = matche_count;
+                var match_count = matchCount(sentence,regexp_text,regExp_flags);
+                scope.match_count = match_count;
                 // view表示
                 scope.view = line_breaks_conversion(val,'<br>');
                 scope.message = '';
@@ -184,7 +184,7 @@ app.controller('myController', ['$scope', function ($scope, $sce) {
 
         } else {
             var val = escapeHtml(sentence);
-            scope.matche_count = 0;
+            scope.match_count = 0;
             scope.view = line_breaks_conversion(val,'<br>');
         }
     });
@@ -249,7 +249,7 @@ function rndStr(){
 function matchCount(str,pattern,regExp_flags) {
     if ( regExp_flags.match(/g/) ) {
         return (str.match(new RegExp(pattern, regExp_flags))||[]).length;
-    } else if ( str.match(pattern) ) { 
+    } else if ( str.match(pattern) ) {
         return 1;
     } else {
         return 0;
