@@ -19,8 +19,8 @@
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
 
     <!-- materialize css -->
-	<link rel="stylesheet" href="node_modules/materialize-css/dist/css/materialize.min.css">
-	<script src="node_modules/materialize-css/dist/js/materialize.min.js"></script>
+   <link rel="stylesheet" href="node_modules/materialize-css/dist/css/materialize.min.css">
+   <script src="node_modules/materialize-css/dist/js/materialize.min.js"></script>
 
     <!-- font-awesome -->
     <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css">
@@ -41,39 +41,39 @@
 
     <div class="main">
         <!-- 文章入力 -->
-     	<div class="row">
-    		<div class="input-field col s12 sentence">
-    			<label>文章入力</label>
-    			<textarea class="materialize-textarea" type="text" ng-model="sentence"></textarea>
-    		</div>
-    	</div>
+        <div class="row">
+          <div class="input-field col s12 sentence">
+             <label>文章入力</label>
+             <textarea class="materialize-textarea" type="text" ng-model="sentence"></textarea>
+          </div>
+       </div>
 
         <div class="row">
             <div class="col s6">
-                <!-- 正規表現入力 -->
-        		<div class="input-field col s12">
-        			<input type="text" ng-model="regexp_text" spellcheck="false">
-        			<label>正規表現入力</label>
-        		</div>
+              <!-- 正規表現入力 -->
+              <div class="input-field col s12">
+                 <input type="text" ng-model="regexp_text" spellcheck="false">
+                 <label>正規表現入力</label>
+              </div>
                 <!-- フラグ設定 -->
                 <div class="switch col s12">
                     <div class="col s12">
                         <label>
-                            <input type="checkbox" ng-model="regexpflg_g" value="g"> 
+                            <input type="checkbox" ng-model="regexpflg_g" value="g">
                             <span class="lever"></span>
                             グローバルなマッチ ( g )
                         </label>
                     </div>
                     <div class="col s12">
                         <label>
-                            <input type="checkbox" ng-model="regexpflg_i" value="i"> 
+                            <input type="checkbox" ng-model="regexpflg_i" value="i">
                             <span class="lever"></span>
                             大文字・小文字の無視 ( i )
                         </label>
                     </div>
                     <div class="col s12">
                         <label>
-                            <input type="checkbox" ng-model="regexpflg_m" value="m"> 
+                            <input type="checkbox" ng-model="regexpflg_m" value="m">
                             <span class="lever"></span>
                             複数行に渡るマッチ ( m )
                         </label>
@@ -116,7 +116,7 @@
                 <div id="test2" class="col s12">
                     <p>javascriptのコードです。コピペで正しく動作します。</p>
                     <pre class="code" ng-bind="match_method"></pre>
-                    
+
                     <p>結果配列</p>
                     <div ng-bind-html="result"></div>
                 </div>
