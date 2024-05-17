@@ -19,6 +19,9 @@ rules:
   comma-style: #カンマの指定
     - error
     - last #最後にカンマをつける
+  camelcase:
+    - error
+    - properties: always
 
 # 参考: https://eslint.org/docs/user-guide/configuring#specifying-environments
 env:
