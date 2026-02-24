@@ -4,4 +4,8 @@
     "files.trimTrailingWhitespace": true,
     "terminal.integrated.defaultProfile.windows": "Git Bash",
     "window.title":"${dirty}${activeEditorMedium}${separator}${rootName}",
+    "search.exclude": {
+        "**/node_modules": true,
+        "yarn.lock": true
+    }
 }
