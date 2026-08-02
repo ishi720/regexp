@@ -162,10 +162,10 @@ app.controller('myController', ['$scope', function ($scope, $sce) {
 
                 if( bracketsCount(regexp_text) > 0 ){
 
-                    var split_array = [];
-                    split_array = regexp_text.split(/\(.*?\)/);
+                    var splitArray = [];
+                    splitArray = regexp_text.split(/\(.*?\)/);
 
-                    var val = sentence.replace( regExp, split_array[0] + radStr1 + '$1' + radStr2 + split_array[1]);
+                    var val = sentence.replace( regExp, splitArray[0] + radStr1 + '$1' + radStr2 + splitArray[1]);
 
                 } else {
                     var val = sentence.replace( regExp, radStr1 + '$1' + radStr2) ;
@@ -193,85 +193,130 @@ app.controller('myController', ['$scope', function ($scope, $sce) {
     });
 }]);
 
-//括弧をエスケープする
+/**
+ * 正規表現の括弧をエスケープする
+ * @param {string} str - エスケープ対象の文字列
+ * @returns {string} エスケープされた文字列
+ */
 function bracketsEscape(str) {
-    if (!str) {
+    if (!str || typeof str !== 'string') {
         return str;
     }
-    str = str.replace( /\(/, '\\(');
-    str = str.replace( /\)/, '\\)');
-    return str;
+    return str.replace(/[()]/g, match => `\\${match}`);
 }
 
-//括弧のペアをカウント
-function bracketsCount(str){
-    return str.split(/\(.*?\)/).length - 1;
+/**
+ * 文字列内の括弧のペア数をカウントする
+ * @param {string} str - カウント対象の文字列
+ * @returns {number} 括弧のペア数
+ */
+function bracketsCount(str) {
+    if (!str || typeof str !== 'string') {
+        return 0;
+    }
+    const matches = str.match(/\([^()]*\)/g);
+    return matches ? matches.length : 0;
 }
 
-
-//改行コードを<br>に変換する
-function lineBreaksConversion(str, break_str) {
-    if (!str) {
+/**
+ * 改行コードを指定の文字列に変換する
+ * @param {string} str - 変換対象の文字列
+ * @param {string} breakStr - 変換後の文字列
+ * @returns {string} 変換後の文字列
+ */
+function lineBreaksConversion(str, breakStr) {
+    if (!str || typeof str !== 'string') {
         return str;
     }
-    str = str.replace( /[\r\n|\n|\r]/g, break_str);
-    return str;
+    if (!breakStr || typeof breakStr !== 'string') {
+        breakStr = '<br>';
+    }
+    return str.replace(/[\r\n]+/g, breakStr);
 }
 
-//htmlをエスケープする
+/**
+ * HTML特殊文字をエスケープする
+ * @param {string} str - エスケープ対象の文字列
+ * @returns {string} エスケープされた文字列
+ */
 function escapeHtml(str) {
-    if (!str) {
+    if (!str || typeof str !== 'string') {
         return str;
     }
-    str = str.replace(/&/g, '&amp;');
-    str = str.replace(/</g, '&lt;');
-    str = str.replace(/>/g, '&gt;');
-    str = str.replace(/"/g, '&quot;');
-    str = str.replace(/'/g, '&#39;');
-    return str;
+    const escapeMap = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+    };
+    return str.replace(/[&<>"']/g, match => escapeMap[match]);
 }
 
-//ランダム文字列作成
-function rndStr(){
-    //使用する文字(正規表現のメタ文字は指定しない)
-    var str = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    //桁数
-    var len = 20;
+/**
+ * ランダムな文字列を生成する
+ * @param {number} [length=20] - 生成する文字列の長さ
+ * @returns {string} 生成されたランダム文字列
+ */
+function rndStr(length = 20) {
+    const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    const charsLength = chars.length;
+    let result = '';
 
-    //ランダムな文字列の生成
-    var res = '';
-    for(var i=0;i<len;i++){
-        res += str.charAt(Math.floor(Math.random() * str.length));
+    // 安全な乱数生成のためにcrypto APIを使用
+    const array = new Uint32Array(length);
+    window.crypto.getRandomValues(array);
+
+    for (let i = 0; i < length; i++) {
+        result += chars[array[i] % charsLength];
     }
-    return res;
+    return result;
 }
 
+/**
+ * 正規表現にマッチする文字列の数をカウントする
+ * @param {string} str - 検索対象の文字列
+ * @param {string} pattern - 正規表現パターン
+ * @param {string} regExpFlags - 正規表現フラグ
+ * @returns {number} マッチした数
+ */
+function matchCount(str, pattern, regExpFlags) {
+    if (!str || !pattern || typeof str !== 'string' || typeof pattern !== 'string') {
+        return 0;
+    }
 
-//マッチした文字をカウント
-function matchCount(str, pattern,regExp_flags) {
-    if ( regExp_flags.match(/g/) ) {
-        return (str.match(new RegExp(pattern, regExp_flags))||[]).length;
-    } else if ( str.match(pattern) ) {
-        return 1;
-    } else {
+    try {
+        const regex = new RegExp(pattern, regExpFlags);
+        const matches = str.match(regex);
+        return matches ? matches.length : 0;
+    } catch (e) {
+        console.error('Invalid regular expression:', e);
         return 0;
     }
 }
 
+/**
+ * 正規表現マッチング用のJavaScriptコードを生成する
+ * @param {string} str - 検索対象の文字列
+ * @param {string} regexpText - 正規表現パターン
+ * @param {string} regExpFlags - 正規表現フラグ
+ * @returns {string} 生成されたJavaScriptコード
+ */
+function matchMethodGenerate(str, regexpText, regExpFlags) {
+    if (!str || !regexpText || typeof str !== 'string' || typeof regexpText !== 'string') {
+        return '';
+    }
 
-// matchメソッドを生成する
-function matchMethodGenerate(str, regexp_text,regExp_flags){
-    if (!str) {
-        str = '';
+    const escapedStr = str.replace(/"/g, '\\"').replace(/\n/g, '\\n');
+    const escapedPattern = regexpText.replace(/"/g, '\\"');
+
+    let code = `var str = "${escapedStr}";\n`;
+    code += `var regExp = new RegExp("${escapedPattern}"`;
+
+    if (regExpFlags) {
+        code += `, "${regExpFlags}"`;
     }
-    if (!regexp_text) {
-        regexp_text = '';
-    }
-    var code = 'var str = "'+ lineBreaksConversion(str,'\\n') + '";\n';
-    code += 'var regExp = new RegExp("'+ regexp_text + '"';
-    if( regExp_flags ){
-        code += ', "'+ regExp_flags + '"';
-    }
+
     code += ');\n';
     code += 'var res = str.match(regExp);\n';
     code += 'console.log(res);';
@@ -279,28 +324,38 @@ function matchMethodGenerate(str, regexp_text,regExp_flags){
     return code;
 }
 
-
-// matchを配列にする
+/**
+ * 配列の内容をHTMLテーブルとして生成する
+ * @param {Array} arr - 表示する配列
+ * @returns {string} 生成されたHTMLテーブル
+ */
 function arrayTable(arr) {
+    if (!Array.isArray(arr) || arr.length === 0) {
+        return '';
+    }
 
-    var code = '';
-    code += '<table class="centered highlight striped">\n';
-    code += '   <thead>\n';
-    code += '   <tr>\n';
-    code += '       <th>key<th>\n';
-    code += '       <th>value<th>\n';
-    code += '   </tr>\n';
-    code += '   </thead>\n';
-    code += '   <tbody>\n';
+    const tableHeader = `
+        <table class="centered highlight striped">
+            <thead>
+                <tr>
+                    <th>key</th>
+                    <th>value</th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
 
-    $.each( arr, function( key, value ) {
-        code += '   <tr>\n';
-        code += '       <td>'+ key +'<td>\n';
-        code += '       <td>'+ value +'<td>\n';
-        code += '   </tr>\n';
-    });
-    code += '   </tbody>\n';
-    code += '</table>\n';
+    const tableRows = arr.map((value, key) => `
+                <tr>
+                    <td>${escapeHtml(String(key))}</td>
+                    <td>${escapeHtml(String(value))}</td>
+                </tr>
+    `).join('');
 
-    return code;
+    const tableFooter = `
+            </tbody>
+        </table>
+    `;
+
+    return tableHeader + tableRows + tableFooter;
 }
