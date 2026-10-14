@@ -63,3 +63,11 @@ span.badge {
 .indicator {
     background-color: $theme_color !important;
 }
+.result_panel {
+    box-shadow: 1px 1px 1px 1px rgba(128, 128, 128, 0.8);
+    border-radius: 1px;
+}
+.result_message {
+    font-size: 0.8em;
+    color: red;
+}

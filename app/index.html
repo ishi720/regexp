@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html ng-app="myApp">
+<html ng-app="myApp" ng-csp>
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; base-uri 'self'; form-action 'none'">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="description" content="簡単に正規表現のテストが出来ます。">
@@ -81,7 +82,7 @@
                 </div>
             </div>
 
-            <div class="col s6" style="box-shadow: 1px 1px 1px 1px rgba(128, 128, 128, 0.8);border-radius: 1px;">
+            <div class="col s6 result_panel">
                 <div class="col s12">
                     <!-- 出力結果 -->
                     <ul class="tabs">
@@ -100,7 +101,7 @@
                         マッチ結果（マッチした文字が<span class="matched">赤く</span>なります）
                         <span ng-bind="match_count" class="badge"></span>
                     </p>
-                    <div style="font-size:0.8em;color:red;" ng-bind="message"></div>
+                    <div class="result_message" ng-bind="message"></div>
 
                     <div class="result_box">
                         <p ng-bind-html="view"></p>
