@@ -1,7 +1,6 @@
 'use strict';
 
-const gulp = require('gulp');
-const { series, parallel } = require('gulp');
+const { src, dest, watch, series, parallel } = require('gulp');
 const uglify = require('gulp-uglify');
 const sass = require('gulp-sass')(require('sass'));
 const cleanCss  = require('gulp-clean-css');
@@ -19,36 +18,47 @@ function browserSyncTask() {
         port: 3000,
         listen: 'localhost',
         ui: false,
+        // 開発時のみ、browser-syncのインラインスクリプトとWebSocketをCSPで許可
+        rewriteRules: [{
+            match: /script-src 'self'/,
+            replace: "script-src 'self' 'unsafe-inline'; connect-src 'self' ws: wss:",
+        }],
     });
 }
 
 // sassコンパイル
 function sassTask() {
-    return gulp.src('./app/css/*.scss')
+    return src('./app/css/*.scss')
         .pipe(plumber())
         .pipe(sourcemaps.init())
         .pipe(sass())
         .pipe(rename({extname: '.min.css'}))
         .pipe(cleanCss({advanced:false}))
         .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest('./app/css'))
+        .pipe(dest('./app/css'))
         .pipe(browserSync.stream());
 }
 
 // js minify
 function jsMinifyTask() {
-    return gulp.src(['./app/js/*.js', '!./app/js/*.min.js'])
+    return src(['./app/js/*.js', '!./app/js/*.min.js'])
         .pipe(plumber())
         .pipe(uglify())
         .pipe(rename({extname: '.min.js'}))
-        .pipe(gulp.dest('./app/js/'))
-        .pipe(browserSync.stream());
+        .pipe(dest('./app/js/'));
+}
+
+// ブラウザリロード
+function reloadTask(done) {
+    browserSync.reload();
+    done();
 }
 
 // ファイル監視
 function watchTask() {
-    gulp.watch('./app/css/*.scss', sassTask);
-    gulp.watch(['./app/js/*.js', '!./app/js/*.min.js'], jsMinifyTask);
+    watch('./app/css/*.scss', sassTask);
+    watch(['./app/js/*.js', '!./app/js/*.min.js'], series(jsMinifyTask, reloadTask));
+    watch('./app/*.html', reloadTask);
 }
 
 // デフォルト処理
