@@ -13,7 +13,9 @@ const browserSync = require('browser-sync').create();
 // browser sync
 function browserSyncTask() {
     browserSync.init({
-        proxy: 'http://localhost/regexp',
+        server: {
+            baseDir: './app',
+        },
         port: 3000,
         listen: 'localhost',
         ui: false,
