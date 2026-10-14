@@ -3,13 +3,13 @@ $(document).ready(function(){
     $('.tabs').tabs();
 });
 
-var app = angular.module('myApp', ['ngSanitize']);
+const app = angular.module('myApp', ['ngSanitize']);
 
 app.controller('myController', ['$scope', function ($scope, $sce) {
 
     //snsリンクにURLをセットする
-    var url = location.href;
-    var encodeURL = encodeURIComponent(url);
+    const url = location.href;
+    const encodeURL = encodeURIComponent(url);
     $scope.encodeURL = encodeURL;
 
     $scope.$watchGroup([
@@ -20,9 +20,9 @@ app.controller('myController', ['$scope', function ($scope, $sce) {
         'regexpflg_m'
     ], function (newVals, oldVals, scope) {
 
-        var sentence = newVals[0];
-        var regexp_text = newVals[1];
-        var regExp_flags = '';
+        const sentence = newVals[0];
+        const regexp_text = newVals[1];
+        let regExp_flags = '';
 
         if ( newVals[2] ) {
             //グローバルなマッチ
@@ -44,19 +44,19 @@ app.controller('myController', ['$scope', function ($scope, $sce) {
 
         if ( sentence && regexp_text ) {
 
-            var exec_check = true;
+            let exec_check = true;
             if ( regexp_text == '^' || regexp_text == '$' ) {
                 exec_check = false;
             }
             if( regExp_flags.match(/g/) && exec_check ){
 
                 // フラグにgがついているとき
-                var regExp = new RegExp( regexp_text, regExp_flags);
+                const regExp = new RegExp( regexp_text, regExp_flags);
 
                 // 正規表現にマッチした先頭文字の位置を取得する
-                var result;
-                var exec_arr = [];
-                var i = 0;
+                let result;
+                const exec_arr = [];
+                let i = 0;
                 while (result = regExp.exec(sentence)) {
                     exec_arr[i] = result.index;
                     i++;
@@ -66,11 +66,11 @@ app.controller('myController', ['$scope', function ($scope, $sce) {
                 }
 
                 // 先頭からマッチした文字列の数を取得する
-                var match_arr = sentence.match(regExp);
+                const match_arr = sentence.match(regExp);
 
                 // マッチ結果作成
-                var val = '';
-                var end_point = 0;
+                let val = '';
+                let end_point = 0;
                 $.each(exec_arr, function(key){
                     // 先頭文字を見つける
                     if( exec_arr[key] == end_point ){
@@ -91,7 +91,7 @@ app.controller('myController', ['$scope', function ($scope, $sce) {
                 //終了したとき
                 val += escapeHtml( sentence.slice(end_point) );
                 // カウント表示
-                var match_count = matchCount(sentence, regexp_text, regExp_flags);
+                const match_count = matchCount(sentence, regexp_text, regExp_flags);
                 scope.match_count = match_count;
                 // view表示
                 scope.view = lineBreaksConversion(val, '<br>');
@@ -101,15 +101,15 @@ app.controller('myController', ['$scope', function ($scope, $sce) {
             } else if ( bracketsCount(regexp_text) > 0){
                 // 括弧があるとき
 
-                var regExp_flags_w = regExp_flags + 'g';
+                const regExp_flags_w = regExp_flags + 'g';
 
-                var regExp = new RegExp( regexp_text, regExp_flags);
-                var regExp_w = new RegExp( regexp_text, regExp_flags_w);
+                const regExp = new RegExp( regexp_text, regExp_flags);
+                const regExp_w = new RegExp( regexp_text, regExp_flags_w);
 
                 // 正規表現にマッチした先頭文字の位置を取得する
-                var result;
-                var exec_arr = [];
-                var i = 0;
+                let result;
+                const exec_arr = [];
+                let i = 0;
                 while (result = regExp_w.exec(sentence)) {
                     exec_arr[i] = result.index;
                     i++;
@@ -119,11 +119,11 @@ app.controller('myController', ['$scope', function ($scope, $sce) {
                 }
 
                 // 先頭からマッチした文字列の数を取得する
-                var match_arr = sentence.match(regExp);
+                const match_arr = sentence.match(regExp);
 
                 // マッチ結果作成
-                var val = '';
-                var end_point = 0;
+                let val = '';
+                let end_point = 0;
 
                 // 先頭文字を見つける
                 if( exec_arr[0] == end_point ){
@@ -142,7 +142,7 @@ app.controller('myController', ['$scope', function ($scope, $sce) {
                 val += escapeHtml(  sentence.slice(end_point) );
 
                 // カウント表示
-                var match_count = match_arr.length;
+                const match_count = match_arr.length;
                 scope.match_count = match_count;
                 // view表示
                 scope.view = lineBreaksConversion(val, '<br>');
@@ -152,37 +152,38 @@ app.controller('myController', ['$scope', function ($scope, $sce) {
 
             } else {
 
+                let pattern;
                 if( bracketsCount(regexp_text) > 0 ) {
-                    var pattern = regexp_text;
+                    pattern = regexp_text;
                 } else {
-                    var pattern = '(' + bracketsEscape(regexp_text) + ')';
+                    pattern = '(' + bracketsEscape(regexp_text) + ')';
                 }
 
-                var regExp = new RegExp( pattern, regExp_flags ) ;
+                const regExp = new RegExp( pattern, regExp_flags ) ;
 
                 // 先頭からマッチした文字列の数を取得する
-                var match_arr = sentence.match(regexp_text, regExp_flags);
+                const match_arr = sentence.match(regexp_text, regExp_flags);
 
-                var radStr1 = rndStr();
-                var radStr2 = rndStr();
+                const radStr1 = rndStr();
+                const radStr2 = rndStr();
 
+                let val;
                 if( bracketsCount(regexp_text) > 0 ){
 
-                    var splitArray = [];
-                    splitArray = regexp_text.split(/\(.*?\)/);
+                    const splitArray = regexp_text.split(/\(.*?\)/);
 
-                    var val = sentence.replace( regExp, splitArray[0] + radStr1 + '$1' + radStr2 + splitArray[1]);
+                    val = sentence.replace( regExp, splitArray[0] + radStr1 + '$1' + radStr2 + splitArray[1]);
 
                 } else {
-                    var val = sentence.replace( regExp, radStr1 + '$1' + radStr2) ;
+                    val = sentence.replace( regExp, radStr1 + '$1' + radStr2) ;
                 }
                 val = escapeHtml(val);
-                var regExp_rnd1 = new RegExp( radStr1, 'g' ) ;
-                var regExp_rnd2 = new RegExp( radStr2, 'g' ) ;
+                const regExp_rnd1 = new RegExp( radStr1, 'g' ) ;
+                const regExp_rnd2 = new RegExp( radStr2, 'g' ) ;
                 val = val.replace(regExp_rnd1,'<span class="matched">');
                 val = val.replace(regExp_rnd2,'</span>');
                 // カウント表示
-                var match_count = matchCount(sentence, regexp_text, regExp_flags);
+                const match_count = matchCount(sentence, regexp_text, regExp_flags);
                 scope.match_count = match_count;
                 // view表示
                 scope.view = lineBreaksConversion(val, '<br>');
@@ -192,7 +193,7 @@ app.controller('myController', ['$scope', function ($scope, $sce) {
             }
 
         } else {
-            var val = escapeHtml(sentence);
+            const val = escapeHtml(sentence);
             scope.match_count = 0;
             scope.view = lineBreaksConversion(val, '<br>');
         }
@@ -313,15 +314,15 @@ function matchMethodGenerate(str, regexpText, regExpFlags) {
         return '';
     }
 
-    let code = `var str = ${JSON.stringify(str)};\n`;
-    code += `var regExp = new RegExp(${JSON.stringify(regexpText)}`;
+    let code = `const str = ${JSON.stringify(str)};\n`;
+    code += `const regExp = new RegExp(${JSON.stringify(regexpText)}`;
 
     if (regExpFlags) {
         code += `, ${JSON.stringify(regExpFlags)}`;
     }
 
     code += ');\n';
-    code += 'var res = str.match(regExp);\n';
+    code += 'const res = str.match(regExp);\n';
     code += 'console.log(res);';
 
     return code;
