@@ -15,6 +15,8 @@ function browserSyncTask() {
     browserSync.init({
         proxy: 'http://localhost/regexp',
         port: 3000,
+        listen: 'localhost',
+        ui: false,
     });
 }
 
