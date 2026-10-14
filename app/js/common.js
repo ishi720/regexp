@@ -313,14 +313,11 @@ function matchMethodGenerate(str, regexpText, regExpFlags) {
         return '';
     }
 
-    const escapedStr = str.replace(/"/g, '\\"').replace(/\n/g, '\\n');
-    const escapedPattern = regexpText.replace(/"/g, '\\"');
-
-    let code = `var str = "${escapedStr}";\n`;
-    code += `var regExp = new RegExp("${escapedPattern}"`;
+    let code = `var str = ${JSON.stringify(str)};\n`;
+    code += `var regExp = new RegExp(${JSON.stringify(regexpText)}`;
 
     if (regExpFlags) {
-        code += `, "${regExpFlags}"`;
+        code += `, ${JSON.stringify(regExpFlags)}`;
     }
 
     code += ');\n';
