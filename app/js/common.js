@@ -60,6 +60,9 @@ app.controller('myController', ['$scope', function ($scope, $sce) {
                 while (result = regExp.exec(sentence)) {
                     exec_arr[i] = result.index;
                     i++;
+                    if (result[0] === '') {
+                        regExp.lastIndex++;
+                    }
                 }
 
                 // 先頭からマッチした文字列の数を取得する
@@ -110,6 +113,9 @@ app.controller('myController', ['$scope', function ($scope, $sce) {
                 while (result = regExp_w.exec(sentence)) {
                     exec_arr[i] = result.index;
                     i++;
+                    if (result[0] === '') {
+                        regExp_w.lastIndex++;
+                    }
                 }
 
                 // 先頭からマッチした文字列の数を取得する
