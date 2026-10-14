@@ -7,8 +7,6 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
   group: pages
@@ -18,18 +16,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 22
 
       - name: Install root dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install --frozen-lockfile --ignore-scripts
 
       - name: Install app dependencies
         working-directory: app
-        run: yarn install --frozen-lockfile
+        run: yarn install --frozen-lockfile --ignore-scripts
 
       - name: Build CSS
         run: yarn gulp sass
@@ -37,22 +37,49 @@ jobs:
       - name: Build JS
         run: yarn gulp jsminify
 
-      - uses: actions/configure-pages@v5
-        with:
-          enablement: true
+      - name: Stage public files
+        run: |
+          set -eu
+          mkdir -p dist/css dist/js dist/img
+          cp app/index.html dist/
+          cp app/css/common.min.css dist/css/
+          cp app/js/common.min.js dist/js/
+          cp app/img/favicon.ico dist/img/
+
+          nm=app/node_modules
+          out=dist/node_modules
+          mkdir -p \
+            $out/angular \
+            $out/angular-sanitize \
+            $out/jquery/dist \
+            $out/materialize-css/dist/css \
+            $out/materialize-css/dist/js \
+            $out/@fortawesome/fontawesome-free/css
+          cp $nm/angular/angular.min.js $out/angular/
+          cp $nm/angular-sanitize/angular-sanitize.min.js $out/angular-sanitize/
+          cp $nm/jquery/dist/jquery.min.js $out/jquery/dist/
+          cp $nm/materialize-css/dist/css/materialize.min.css $out/materialize-css/dist/css/
+          cp $nm/materialize-css/dist/js/materialize.min.js $out/materialize-css/dist/js/
+          cp $nm/@fortawesome/fontawesome-free/css/all.min.css $out/@fortawesome/fontawesome-free/css/
+          cp -r $nm/@fortawesome/fontawesome-free/webfonts $out/@fortawesome/fontawesome-free/
+
+      - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
 
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
         with:
-          path: app
+          path: dist
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
