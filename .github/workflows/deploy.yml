@@ -53,15 +53,12 @@ jobs:
             $out/angular-sanitize \
             $out/jquery/dist \
             $out/materialize-css/dist/css \
-            $out/materialize-css/dist/js \
-            $out/@fortawesome/fontawesome-free/css
+            $out/materialize-css/dist/js
           cp $nm/angular/angular.min.js $out/angular/
           cp $nm/angular-sanitize/angular-sanitize.min.js $out/angular-sanitize/
           cp $nm/jquery/dist/jquery.min.js $out/jquery/dist/
           cp $nm/materialize-css/dist/css/materialize.min.css $out/materialize-css/dist/css/
           cp $nm/materialize-css/dist/js/materialize.min.js $out/materialize-css/dist/js/
-          cp $nm/@fortawesome/fontawesome-free/css/all.min.css $out/@fortawesome/fontawesome-free/css/
-          cp -r $nm/@fortawesome/fontawesome-free/webfonts $out/@fortawesome/fontawesome-free/
 
       - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
 

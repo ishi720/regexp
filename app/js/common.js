@@ -5,12 +5,7 @@ $(document).ready(function(){
 
 const app = angular.module('myApp', ['ngSanitize']);
 
-app.controller('myController', ['$scope', function ($scope, $sce) {
-
-    //snsリンクにURLをセットする
-    const url = location.href;
-    const encodeURL = encodeURIComponent(url);
-    $scope.encodeURL = encodeURL;
+app.controller('myController', ['$scope', function ($scope) {
 
     $scope.$watchGroup([
         'sentence',
@@ -152,12 +147,7 @@ app.controller('myController', ['$scope', function ($scope, $sce) {
 
             } else {
 
-                let pattern;
-                if( bracketsCount(regexp_text) > 0 ) {
-                    pattern = regexp_text;
-                } else {
-                    pattern = '(' + bracketsEscape(regexp_text) + ')';
-                }
+                const pattern = '(' + bracketsEscape(regexp_text) + ')';
 
                 const regExp = new RegExp( pattern, regExp_flags ) ;
 
@@ -167,16 +157,7 @@ app.controller('myController', ['$scope', function ($scope, $sce) {
                 const radStr1 = rndStr();
                 const radStr2 = rndStr();
 
-                let val;
-                if( bracketsCount(regexp_text) > 0 ){
-
-                    const splitArray = regexp_text.split(/\(.*?\)/);
-
-                    val = sentence.replace( regExp, splitArray[0] + radStr1 + '$1' + radStr2 + splitArray[1]);
-
-                } else {
-                    val = sentence.replace( regExp, radStr1 + '$1' + radStr2) ;
-                }
+                let val = sentence.replace( regExp, radStr1 + '$1' + radStr2) ;
                 val = escapeHtml(val);
                 const regExp_rnd1 = new RegExp( radStr1, 'g' ) ;
                 const regExp_rnd2 = new RegExp( radStr2, 'g' ) ;
