@@ -39,6 +39,17 @@ app.controller('myController', ['$scope', function ($scope) {
 
         if ( sentence && regexp_text ) {
 
+            // 入力途中などで不正な正規表現のときはマッチなしとして表示する
+            try {
+                new RegExp( regexp_text, regExp_flags );
+            } catch (e) {
+                scope.match_count = 0;
+                scope.view = lineBreaksConversion(escapeHtml(sentence), '<br>');
+                scope.message = '';
+                scope.result = '';
+                return;
+            }
+
             let exec_check = true;
             if ( regexp_text == '^' || regexp_text == '$' ) {
                 exec_check = false;
@@ -93,8 +104,8 @@ app.controller('myController', ['$scope', function ($scope) {
                 scope.message = '';
                 // 配列表示
                 scope.result = arrayTable(match_arr);
-            } else if ( bracketsCount(regexp_text) > 0){
-                // 括弧があるとき
+            } else if ( bracketsCount(regexp_text) > 0 && new RegExp(regexp_text, regExp_flags).test(sentence) ){
+                // 括弧があり、マッチするとき（マッチしないときは下の分岐で表示する）
 
                 const regExp_flags_w = regExp_flags + 'g';
 
@@ -147,17 +158,16 @@ app.controller('myController', ['$scope', function ($scope) {
 
             } else {
 
-                const pattern = '(' + bracketsEscape(regexp_text) + ')';
-
-                const regExp = new RegExp( pattern, regExp_flags ) ;
+                const regExp = new RegExp( regexp_text, regExp_flags ) ;
 
                 // 先頭からマッチした文字列の数を取得する
-                const match_arr = sentence.match(regexp_text, regExp_flags);
+                const match_arr = sentence.match(regExp);
 
                 const radStr1 = rndStr();
                 const radStr2 = rndStr();
 
-                let val = sentence.replace( regExp, radStr1 + '$1' + radStr2) ;
+                // $& はマッチした文字列全体
+                let val = sentence.replace( regExp, radStr1 + '$&' + radStr2) ;
                 val = escapeHtml(val);
                 const regExp_rnd1 = new RegExp( radStr1, 'g' ) ;
                 const regExp_rnd2 = new RegExp( radStr2, 'g' ) ;
@@ -177,21 +187,11 @@ app.controller('myController', ['$scope', function ($scope) {
             const val = escapeHtml(sentence);
             scope.match_count = 0;
             scope.view = lineBreaksConversion(val, '<br>');
+            scope.message = '';
+            scope.result = '';
         }
     });
 }]);
-
-/**
- * 正規表現の括弧をエスケープする
- * @param {string} str - エスケープ対象の文字列
- * @returns {string} エスケープされた文字列
- */
-function bracketsEscape(str) {
-    if (!str || typeof str !== 'string') {
-        return str;
-    }
-    return str.replace(/[()]/g, match => `\\${match}`);
-}
 
 /**
  * 文字列内の括弧のペア数をカウントする
