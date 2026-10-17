@@ -31,11 +31,8 @@ jobs:
         working-directory: app
         run: yarn install --frozen-lockfile --ignore-scripts
 
-      - name: Build CSS
-        run: yarn gulp sass
-
-      - name: Build JS
-        run: yarn gulp jsminify
+      - name: Build CSS/JS
+        run: yarn gulp build
 
       - name: Stage public files
         run: |

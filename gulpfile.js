@@ -61,11 +61,15 @@ function watchTask() {
     watch('./app/*.html', reloadTask);
 }
 
+// ビルド処理
+const buildTask = parallel(sassTask, jsMinifyTask);
+
 // デフォルト処理
-const defaultTask = series(parallel(browserSyncTask, watchTask), () => {
+const defaultTask = series(buildTask, parallel(browserSyncTask, watchTask), () => {
     browserSync.reload();
 });
 
 exports.sass = sassTask;
 exports.jsminify = jsMinifyTask;
+exports.build = buildTask;
 exports.default = defaultTask;
