@@ -8,6 +8,9 @@
   },
   "author": "ishi720",
   "license": "MIT",
+  "engines": {
+    "node": ">=22.23.4"
+  },
   "dependencies": {
     "browser-sync": "3.x.x",
     "gulp": "5.x.x",
