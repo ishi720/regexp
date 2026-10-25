@@ -40,8 +40,8 @@
         <!-- 文章入力 -->
         <div class="row">
           <div class="input-field col s12 sentence">
-             <label>文章入力</label>
-             <textarea class="materialize-textarea" type="text" ng-model="sentence"></textarea>
+             <label for="sentence">文章入力</label>
+             <textarea id="sentence" class="materialize-textarea" type="text" ng-model="sentence"></textarea>
           </div>
        </div>
 
@@ -49,8 +49,8 @@
             <div class="col s6">
               <!-- 正規表現入力 -->
               <div class="input-field col s12">
-                 <input type="text" ng-model="regexp_text" spellcheck="false">
-                 <label>正規表現入力</label>
+                 <input id="regexp_text" type="text" ng-model="regexp_text" spellcheck="false">
+                 <label for="regexp_text">正規表現入力</label>
               </div>
                 <!-- フラグ設定 -->
                 <div class="switch col s12">
