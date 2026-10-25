@@ -49,12 +49,10 @@ jobs:
           mkdir -p \
             $out/angular \
             $out/angular-sanitize \
-            $out/jquery/dist \
             $out/materialize-css/dist/css \
             $out/materialize-css/dist/js
           cp $nm/angular/angular.min.js $out/angular/
           cp $nm/angular-sanitize/angular-sanitize.min.js $out/angular-sanitize/
-          cp $nm/jquery/dist/jquery.min.js $out/jquery/dist/
           cp $nm/materialize-css/dist/css/materialize.min.css $out/materialize-css/dist/css/
           cp $nm/materialize-css/dist/js/materialize.min.js $out/materialize-css/dist/js/
 

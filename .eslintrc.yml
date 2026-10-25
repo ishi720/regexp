@@ -30,9 +30,12 @@ rules:
 # 参考: https://eslint.org/docs/user-guide/configuring#specifying-environments
 env:
   browser: true
-  jquery: true
   amd: true
   es6: true
+
+globals:
+  M: readonly # materialize-css
+  angular: readonly
 
 extends:
   - eslint:recommended #ESlintオススメの設定

@@ -1,6 +1,6 @@
 //materialize-cssでtab切り替え
-$(document).ready(function(){
-    $('.tabs').tabs();
+document.addEventListener('DOMContentLoaded', function () {
+    M.Tabs.init(document.querySelectorAll('.tabs'));
 });
 
 const app = angular.module('myApp', ['ngSanitize']);
@@ -77,7 +77,7 @@ app.controller('myController', ['$scope', function ($scope) {
                 // マッチ結果作成
                 let val = '';
                 let end_point = 0;
-                $.each(exec_arr, function(key){
+                exec_arr.forEach(function(_, key){
                     // 先頭文字を見つける
                     if( exec_arr[key] == end_point ){
                         val += '<span class="matched">';

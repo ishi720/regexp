@@ -6,7 +6,6 @@
   "dependencies": {
     "angular": "1.x.x",
     "angular-sanitize": "1.x.x",
-    "jquery": "3.x.x",
     "materialize-css": "1.x.x"
   }
 }
